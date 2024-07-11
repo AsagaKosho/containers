@@ -1,0 +1,16 @@
+Bootstrap: docker
+From: alpine:3.20.1
+
+%post
+  apk add --no-cache wget tar
+
+  cd $HOME
+
+  # seqkit:2.8.2
+  wget https://github.com/shenwei356/seqkit/releases/download/v2.8.2/seqkit_linux_amd64.tar.gz
+  tar -zxvf seqkit_linux_amd64.tar.gz
+  mv seqkit /usr/local/
+  ln -s /usr/local/seqkit /usr/local/bin/seqkit
+
+%runscript
+  seqkit --help
